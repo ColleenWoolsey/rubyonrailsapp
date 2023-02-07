@@ -1,0 +1,2 @@
+module RockpaperPageHelper
+end
