@@ -1,50 +1,3 @@
-# 2 classes in app 1 = Game (app class)  2 = Player class with 2 instances
-
-class Player
-    MOVES = [:rock, :paper, :scissors]
-    
-    attr_reader :score, :move, :name
-    
-    def initialize(name)
-        @name = name
-        @score = 0
-        @move = nil
-    end
-    
-    def get_move
-        loop do
-        # Loop continues until get a valid move or quit
-            puts "Pick a move."
-            print "> "
-            @move = gets.chomp.strip.downcase.to_sym
-            if @move == :quit
-                return false
-            elsif MOVES.include?(@move)
-                return @move
-            else
-                puts "Invalid Move"
-            end    
-        end
-    end
-    
-    def win
-        @score += 1
-    end
-    
-end
-
-
-  
-class ComputerPlayer < Player
-# ComputerPlayer class inherits from Player
-# Define a get_move that over-rides method in parent class
-  def get_move
-      @move = [:rock, :paper, :scissors].sample
-  end
-end
-
-
-
 class Game
     # WIN_SCENS are for player 1
     WIN_SCENS = [
@@ -122,5 +75,3 @@ class Game
     end
    
 end
-
-Game.new
