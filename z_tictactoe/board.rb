@@ -9,16 +9,46 @@ class Board
     end
     
     
-    def print_grid
-        @grid.each do |row|
-            puts
-            row.each do |cell|
-                print "[#{cell}]"
-            end
-        end
-        puts
-    end
+    # def print_grid
+    #     @grid.each do |row|
+    #         puts # Like saying print "n\" (new line character)
+    #         row.each do |cell|
+    #             print "[#{cell}]"
+    #         end
+    #     end
+    #     puts
+    # end
+    # For an array of strings, puts prints out every member on it's own line
     
+    # FIRST REFACTOR - This pattern creates an object, and adds to it by
+    # iterating over it (reduce method)
+    #  def print_grid
+    #      output = [""]     # Variable to hold array want to print
+    #     @grid.each do |row|
+    #         row_string = ""     #Initialize with empty
+    #         row.each do |cell|
+    #             row_string << "[#{cell}]"   # Append the cell to this row
+    #         end
+    #         output << row_string     # Take row just built and append it to output
+    #     end
+    #     output << ""     # Add an empty line at end / reinitialize output
+    # end
+    
+    # SECOND REFACTOR
+    # def print_grid
+    #     # Replace call to each with a reduce and add an accumulator value
+    #     # to row. Then split off to a seperate function
+    #     output=@grid.reduce([""]) do |output_string, row|
+    #       output_string << format_row(row)
+    #     end
+    #     output << ""
+    # end
+    
+    # THIRD REFACTOR - 74 - Refactoring Print Grid
+    def print_grid
+        @grid.reduce([""]) { |output, row| output << format_row(row ) } << ""
+    end
+        
     
     def row_win?(x_or_o)
         @grid.any? do |row|
@@ -71,6 +101,11 @@ class Board
         else
             false
         end
+    end
+    
+    private
+    def format_row(row)
+        row.reduce("") { |row_string, cell| row_string << "[#{cell}]" }
     end
     
 #end of class Board

@@ -7,15 +7,13 @@ puts players = [
 ]
 
 p game = Game.new(players)
-
-puts
 puts
 puts "Welcome to tic tac toe!"
-game.print_board
+puts game.print_board
 puts
 puts "Player One, you go first. Pick a move"
 p game.play_turn(players[0])
-game.print_board
+puts game.print_board
 
 
 # On Game class, create a method to get the player's move,
